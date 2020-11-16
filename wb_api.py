@@ -5,6 +5,7 @@ from get_report import get_report
 import time
 from error_email import error_emailer
 import schedule
+
 # MDM5YzQxODUtMGZhNC00MzlkLThjYzktOGRlODAwMDVkY2Nh
 # 039c4185-0fa4-439d-8cc9-8de80005dcca
 
@@ -19,8 +20,6 @@ sales = 'https://suppliers-stats.wildberries.ru/api/v1/supplier/sales'
 sklad = 'https://suppliers-stats.wildberries.ru/api/v1/supplier/stocks'
 orders = 'https://suppliers-stats.wildberries.ru/api/v1/supplier/orders'
 realize = 'https://suppliers-stats.wildberries.ru/api/v1/supplier/reportDetailByPeriod'
-
-
 
 # for sklad report
 """
@@ -70,16 +69,27 @@ Pricewithdisc = totalprice*((100 – discountPercent)/100 ) *((100 – promoCode
 за предыдущий 4-го числа.
 """
 
-if date.today().weekday() != 0:
-    dt = date.today() - timedelta(1)
-    dt2 = date.today()
-else:
-    dt = date.today() - timedelta(7)
-    dt2 = date.today() - timedelta(1)
+
+def get_from_date_for_sales_report():
+    if date.today().weekday() != 0:
+        dt = date.today() - timedelta(1)
+    else:
+        dt = date.today() - timedelta(7)
+    return dt
+
+
+def get_to_date_for_sales_report():
+    if date.today().weekday() != 0:
+        dt = date.today()
+    else:
+        dt = date.today() - timedelta(1)
+    return dt
+
 
 sales_params = {'key': {key},
                 'flag': 1,
-                'dateFrom': {dt}, 'dateTo': {dt2},  # during date by default
+                'dateFrom': {get_from_date_for_sales_report()}, 'dateTo': {get_to_date_for_sales_report()},
+                # during date by default
                 'limit': 100_000, }  # 'rrdid': 10,
 
 # orders params
@@ -150,7 +160,9 @@ def launch_reports():
 
     clean_folder()  # cleaning workfolder
 
-schedule.every().day.at("17:58").do(launch_reports)
+
+# schedule.every().day.at("17:58").do(launch_reports)
+schedule.every(30).minutes.do(launch_reports)
 
 while True:
     schedule.run_pending()
