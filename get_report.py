@@ -6,7 +6,7 @@ import time
 
 
 def get_report(url, params, report_name: str):
-    print(f'starting {report_name} report with {params} by {url}')
+    # print(f'starting {report_date} report with {params} by {url}')
     report = requests.get(url, params=params,)
 
     print(os.path.join(f'files/{report_name} report status code:'), report.status_code)
@@ -27,8 +27,8 @@ def get_report(url, params, report_name: str):
     df.to_excel(os.path.join(f'files/{report_name}_{date_str}.xlsx'))
     print(f'files/{report_name}_{date_str}.xlsx saved')
     filename = f'files/{report_name}_{date_str}.xlsx'
-    # os.remove(f'files/{report_name}.json')
-    # print(f'files/{report_name}.json removed')
+    # os.remove(f'files/{report_date}.json')
+    # print(f'files/{report_date}.json removed')
     return filename
 
 

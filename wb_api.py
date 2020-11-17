@@ -11,7 +11,7 @@ import schedule
 
 date_str = time.strftime("%Y-%m-%d")  # using in filenames and reports params
 key = 'MDM5YzQxODUtMGZhNC00MzlkLThjYzktOGRlODAwMDVkY2Nh'
-to_emails = "ildar.yakhin@gmail.com"  # you can add adresses separated by ;
+to_emails = "ildar.yakhin@gmail.com; galnykin_v@s3.ru; olyukov.mn@pg.com"  # you can add adresses separated by ;
 from_email = "ildar.python@gmail.com"  # gmail only
 from_email_pass = "wbpython12345!"
 
@@ -161,8 +161,10 @@ def launch_reports():
     clean_folder()  # cleaning workfolder
 
 
-# schedule.every().day.at("17:58").do(launch_reports)
-schedule.every(30).minutes.do(launch_reports)
+schedule.every().day.at("08:00").do(launch_reports)
+# schedule.every(30).minutes.do(launch_reports)
+
+
 
 while True:
     schedule.run_pending()
