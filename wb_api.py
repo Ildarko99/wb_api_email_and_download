@@ -146,9 +146,9 @@ def launch_reports():
     clean_folder()
     sklad_report = get_report(sklad, sklad_params, 'sklad')
     time.sleep(3)
-    sales_report = get_report(sales, sales_params, 'orders')
+    sales_report = get_report(sales, sales_params, 'sales')
     time.sleep(3)
-    orders_report = get_report(orders, orders_params, 'sales')
+    orders_report = get_report(orders, orders_params, 'orders')
     time.sleep(3)
     postavki_report = get_report(postavki, postavki_params, 'postavki')
     try:
