@@ -6,11 +6,18 @@ import time
 from error_email import error_emailer
 import schedule
 
-# MDM5YzQxODUtMGZhNC00MzlkLThjYzktOGRlODAwMDVkY2Nh
-# 039c4185-0fa4-439d-8cc9-8de80005dcca
+"""
+Орион
+MDM5YzQxODUtMGZhNC00MzlkLThjYzktOGRlODAwMDVkY2Nh
+039c4185-0fa4-439d-8cc9-8de80005dcca
+
+ВИП Маркет
+930c9ac6-4a88-4a51-8e43-7a444a102f8d 
+Ключ Base64: OTMwYzlhYzYtNGE4OC00YTUxLThlNDMtN2E0NDRhMTAyZjhk
+"""
 
 date_str = time.strftime("%Y-%m-%d")  # using in filenames and reports params
-key = 'MDM5YzQxODUtMGZhNC00MzlkLThjYzktOGRlODAwMDVkY2Nh'
+key = 'OTMwYzlhYzYtNGE4OC00YTUxLThlNDMtN2E0NDRhMTAyZjhk'
 to_emails = "ildar.yakhin@gmail.com; galnykin_v@s3.ru; olyukov.mn@pg.com"  # you can add adresses separated by ;
 from_email = "ildar.python@gmail.com"  # gmail only
 from_email_pass = "wbpython12345!"
@@ -164,7 +171,7 @@ def launch_reports():
 schedule.every().day.at("08:00").do(launch_reports)
 # schedule.every(30).minutes.do(launch_reports)
 
-
+# launch_reports()
 
 while True:
     schedule.run_pending()
